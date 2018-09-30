@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.xiaoxiong.test.RatingBarTestActivity">
+    android:layout_height="match_parent" >
 
-</android.support.constraint.ConstraintLayout>
+    <!-- 默认style 就是ratingBarStyle，和第二个是一样的 -->
+    <!-- 默认参数：星5 步长0.5 初始值 0 -->
+    <RatingBar
+        android:id="@+id/ratingBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stepSize="1"/>
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:background="#929292"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <!-- style ratingBarStyle -->
+    <!-- 参数：星4 步长0.5 初始值 1 -->
+    <RatingBar
+        android:id="@+id/ratingBar2"
+        style="?android:attr/ratingBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="4"
+        android:stepSize="0.5"
+        android:rating="1" />
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:background="#929292"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <!-- style ratingBarStyleIndicator 不可交互，中等大小 -->
+    <!-- 参数：星5 初始值 2 不可交互，设置步长无意义 -->
+    <RatingBar
+        android:id="@+id/ratingBarOne"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="2"/>
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:background="#929292"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <!-- style ratingBarStyleSmall 不可交互，小星星 -->
+    <!-- 参数：星4 初始值 2 不可交互，设置步长无意义 -->
+    <RatingBar
+        android:id="@+id/ratingBarTwo"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="4"
+        android:rating="2" />
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:background="#929292"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

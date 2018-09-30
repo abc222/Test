@@ -8,6 +8,12 @@
               tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/ratingbar_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RatingBar Test"/>
+
+    <Button
         android:id="@+id/fragment_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
