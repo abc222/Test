@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/fragment_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fragment Test"/>
+
+    <Button
+        android:id="@+id/broadcast_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Broadcast Test"/>
 
     <Button
         android:id="@+id/send_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Send Request"/>
+
+    <Button
+        android:id="@+id/listviewtest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ListView Test"/>
+
+    <com.example.xiaoxiong.test.MyView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:default_size="100dp"
+        android:background="#ff2222"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,4 +47,4 @@
             android:layout_height="wrap_content"/>
     </ScrollView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
