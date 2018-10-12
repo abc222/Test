@@ -8,8 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+    <style name="myRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingstar</item>
+        <!--<item name="android:minHeight">22dip</item>-->
+        <!--<item name="android:maxHeight">22dip</item>-->
+    </style>
+
+
     <declare-styleable name="MyView">
-                       <attr name="default_size" format="dimension" />
+        <attr name="default_size" format="dimension"/>
     </declare-styleable>
 
 </resources>
