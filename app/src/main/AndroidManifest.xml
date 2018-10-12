@@ -46,6 +46,8 @@
         </activity>
         <activity android:name=".RatingBarTestActivity">
         </activity>
+        <activity android:name=".DynamicThemeActivity">
+        </activity>
     </application>
 
 </manifest>

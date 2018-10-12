@@ -23,6 +23,47 @@
         <!--<item name="android:maxHeight">22dip</item>-->
     </style>
 
+    <!--动态主题配置-->
+    <!-- Base application theme. -->
+    <style name="AppThemeDefault" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDef</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDef</item>
+        <item name="colorAccent">@color/colorAccentDef</item>
+        <item name="colorText">@color/colorTextBlack</item>
+        <item name="colorTextBackground">@color/colorTextWhite</item>
+    </style>
+
+    <style name="AppThemeLightBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryLightBlue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
+        <item name="colorAccent">@color/colorAccentDef</item>
+        <item name="colorText">@color/colorTextBlack</item>
+        <item name="colorTextBackground">@color/colorBgBlue</item>
+    </style>
+
+    <style name="AppThemeDeepBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDeepBlue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDeepBlue</item>
+        <item name="colorAccent">@color/colorAccentDef</item>
+        <item name="colorText">@color/colorTextWhite</item>
+        <item name="colorTextBackground">@color/colorBgDeepBlue</item>
+    </style>
+
+    <style name="AppThemeGreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryGreen</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkGreen</item>
+        <item name="colorAccent">@color/colorAccentDef</item>
+        <item name="colorText">@color/colorTextBlack</item>
+        <item name="colorTextBackground">@color/colorBgGreen</item>
+    </style>
+
+    <style name="AppThemePink" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryPink</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkPink</item>
+        <item name="colorAccent">@color/colorAccentDef</item>
+        <item name="colorText">@color/colorTextWhite</item>
+        <item name="colorTextBackground">@color/colorBgPink</item>
+    </style>
 
     <declare-styleable name="MyView">
         <attr name="default_size" format="dimension"/>

@@ -48,12 +48,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button dynamicTheme = (Button)findViewById(R.id.dynamic_theme);
         Button ratingbarTest = (Button)findViewById(R.id.ratingbar_test);
         Button fragmentTest = (Button) findViewById(R.id.fragment_test);
         Button broadcastTest = (Button) findViewById(R.id.broadcast_test);
         Button sendRequest = (Button) findViewById(R.id.send_request);
         Button listviewTest = (Button) findViewById(R.id.listviewtest);
         responseText = (TextView) findViewById(R.id.reponse_text);
+        dynamicTheme.setOnClickListener(this);
         ratingbarTest.setOnClickListener(this);
         fragmentTest.setOnClickListener(this);
         broadcastTest.setOnClickListener(this);
@@ -94,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.dynamic_theme:
+                Intent intent0 = new Intent(this, DynamicThemeActivity.class);
+                startActivity(intent0);
+                break;
             case R.id.ratingbar_test:
                 Intent intent = new Intent(this, RatingBarTestActivity.class);
                 startActivity(intent);
