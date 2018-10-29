@@ -44,7 +44,8 @@ public class RatingDialog extends Dialog {
 
         initView();
 
-        setCanceledOnTouchOutside(false);
+        //点击空白区域是否消失
+        //setCanceledOnTouchOutside(false);
     }
 
     public void initView(){

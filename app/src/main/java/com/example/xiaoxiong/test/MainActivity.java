@@ -1,17 +1,22 @@
 package com.example.xiaoxiong.test;
 
+import android.app.Dialog;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mnt.MntLib;
 
@@ -29,9 +34,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
 import java.net.HttpURLConnection;
-import java.net.ResponseCache;
 import java.net.URL;
 import java.util.concurrent.Executors;
 
@@ -42,14 +45,27 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView responseText;
+    private static int sTheme;
+
+    //底部弹窗相关
+    private View inflate;
+    private TextView choosePhoto;
+    private TextView takePhoto;
+    private Button cancel;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (sTheme != 0) {
+            //设置主题
+            setTheme(sTheme);
+        }
         setContentView(R.layout.activity_main);
 
-        Button dynamicTheme = (Button)findViewById(R.id.dynamic_theme);
-        Button ratingbarTest = (Button)findViewById(R.id.ratingbar_test);
+        findViewById(R.id.bottom_dialog_show).setOnClickListener(this);
+        Button dynamicTheme = (Button) findViewById(R.id.dynamic_theme);
+        Button ratingbarTest = (Button) findViewById(R.id.ratingbar_test);
         Button fragmentTest = (Button) findViewById(R.id.fragment_test);
         Button broadcastTest = (Button) findViewById(R.id.broadcast_test);
         Button sendRequest = (Button) findViewById(R.id.send_request);
@@ -62,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sendRequest.setOnClickListener(this);
         listviewTest.setOnClickListener(this);
 
-
-
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //获取GoogleID
         Executors.newSingleThreadExecutor().execute(new Runnable() {
@@ -79,9 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         //获取AndroidID
-        String ANDROID_ID = Settings.System.getString(getContentResolver(),Settings.System.ANDROID_ID);
-        Log.d("MainActivity","Android ID: " + ANDROID_ID);
-
+        String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+        Log.d("MainActivity", "Android ID: " + ANDROID_ID);
 
 
         //testReflectionField();
@@ -96,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.bottom_dialog_show:
+                show();
+                break;
             case R.id.dynamic_theme:
                 Intent intent0 = new Intent(this, DynamicThemeActivity.class);
                 startActivity(intent0);
@@ -117,8 +135,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2);
                 break;
             case R.id.listviewtest:
-                Intent intent3 = new Intent(this,ListViewTestActivity.class);
+                Intent intent3 = new Intent(this, ListViewTestActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.choosePhoto:
+                Toast.makeText(this,"choosePhoto",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                break;
+            case R.id.takePhoto:
+                Toast.makeText(this,"takePhoto",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                break;
+            case R.id.btn_cancel:
+                dialog.dismiss();
                 break;
             default:
                 break;
@@ -320,29 +349,85 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void reflectTest() {
 
-        try{
+        try {
             //获取类
             Class c = Class.forName("com.example.xiaoxiong.test.TestClass");    //这里一定要用完整的包名
             //实例化一个TestClass对象
             TestClass tc = (TestClass) c.newInstance();
             //获取类的方法
             Method[] ms = c.getDeclaredMethods();
-            for(Method method : ms){
-                if(method.isAnnotationPresent(TestClass.BindGet.class)){
+            for (Method method : ms) {
+                if (method.isAnnotationPresent(TestClass.BindGet.class)) {
                     TestClass.BindGet bindGet = method.getAnnotation(TestClass.BindGet.class);
                     String param = bindGet.value();
-                    method.invoke(tc,param);
+                    method.invoke(tc, param);
                 }
             }
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }catch (InstantiationException e){
+        } catch (InstantiationException e) {
             e.printStackTrace();
-        }catch (IllegalAccessException e){
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }catch (InvocationTargetException e){
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.item1:
+                    //将选中的主题资源id保存到静态变量中
+                    sTheme = R.style.AppThemeLightBlue;
+                    //重构Activity才能应用新的主题
+                    recreate();
+                    return true;
+                case R.id.item2:
+                    sTheme = R.style.AppThemeDeepBlue;
+                    recreate();
+                    return true;
+                case R.id.item3:
+                    sTheme = R.style.AppThemeGreen;
+                    recreate();
+                    return true;
+                case R.id.item4:
+                    sTheme = R.style.AppThemePink;
+                    recreate();
+                    return true;
+            }
+            return false;
+        }
+
+    };
+
+    //底部弹窗相关
+    public void show(){
+        dialog = new Dialog(this,R.style.ActionSheetDialogStyle);
+        //填充对话框的布局
+        inflate = LayoutInflater.from(this).inflate(R.layout.popup_window_from_bottom,null);
+        //初始化控件
+        choosePhoto = (TextView)inflate.findViewById(R.id.choosePhoto);
+        takePhoto = (TextView)inflate.findViewById(R.id.takePhoto);
+        cancel = (Button)inflate.findViewById(R.id.btn_cancel);
+        choosePhoto.setOnClickListener(this);
+        takePhoto.setOnClickListener(this);
+        cancel.setOnClickListener(this);
+        //将布局设置给Dialog
+        dialog.setContentView(inflate);
+        //获取当前Activity所在的窗体
+        Window dialogWindow = dialog.getWindow();
+        //设置Dialog从窗体底部弹出
+        dialogWindow.setGravity(Gravity.BOTTOM);
+        //获得窗体的属性
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.y = 20;//设置Dialog距离底部的距离
+        //将属性设置给窗体
+        dialogWindow.setAttributes(lp);
+        dialog.show();//显示对话框
     }
 }

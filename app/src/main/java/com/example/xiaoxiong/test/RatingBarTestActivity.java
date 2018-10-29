@@ -1,16 +1,24 @@
 package com.example.xiaoxiong.test;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLOutput;
 
-public class RatingBarTestActivity extends AppCompatActivity {
+public class RatingBarTestActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String TAG = "RatingBarTestActivity";
 
@@ -22,11 +30,11 @@ public class RatingBarTestActivity extends AppCompatActivity {
     private RatingBar ratingBarOne = null;
     private RatingBar ratingBarTwo = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating_bar_test);
+        findViewById(R.id.rating_dialog_show).setOnClickListener(this);
         initView();
 
 //        View ratingBar = getLayoutInflater().inflate(R.layout.dialog_rate,null);
@@ -40,9 +48,6 @@ public class RatingBarTestActivity extends AppCompatActivity {
 ////                        float star = ratingBar.getRating();
 //                    }
 //                }).setNegativeButton("取消", null).show();
-
-        RatingDialog ratingDialog = new RatingDialog(this);
-        ratingDialog.show();
 
     }
 
@@ -80,5 +85,17 @@ public class RatingBarTestActivity extends AppCompatActivity {
                 ratingBarTwo.setRating(rating);
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.rating_dialog_show:
+                RatingDialog ratingDialog = new RatingDialog(this);
+                ratingDialog.show();
+                break;
+                default:
+                    break;
+        }
     }
 }

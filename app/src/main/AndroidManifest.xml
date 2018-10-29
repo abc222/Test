@@ -38,7 +38,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.example.xiaoxiong.test.MY_BROADCAST"/>
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
         </receiver>
 
@@ -47,6 +47,18 @@
         <activity android:name=".RatingBarTestActivity">
         </activity>
         <activity android:name=".DynamicThemeActivity">
+        </activity>
+
+        <receiver
+            android:name=".ScreeOnBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SCREEN_ON"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".NewsContentActivity">
         </activity>
     </application>
 

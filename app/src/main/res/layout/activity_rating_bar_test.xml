@@ -68,4 +68,10 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 
+    <Button
+        android:id="@+id/rating_dialog_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rating Dialog"/>
+
 </LinearLayout>

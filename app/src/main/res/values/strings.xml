@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Test</string>
+    <string name="title_blue">blue</string>
+    <string name="title_deep_blue">deep_blue</string>
+    <string name="title_green">green</string>
+    <string name="title_pink">pink</string>
 </resources>
