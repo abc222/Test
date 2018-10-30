@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:allowBackup="true"
@@ -42,8 +43,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ListViewTestActivity">
-        </activity>
         <activity android:name=".RatingBarTestActivity">
         </activity>
         <activity android:name=".DynamicThemeActivity">
@@ -59,6 +58,28 @@
         </receiver>
 
         <activity android:name=".NewsContentActivity">
+        </activity>
+        <activity android:name=".ContentProviderTestActivity">
+        </activity>
+
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="com.example.xiaoxiong.test.mycontetnprovider"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".MyIntentService"
+            android:exported="false">
+        </service>
+
+        <activity android:name=".servicepractice.ServiceTestActivity">
         </activity>
     </application>
 

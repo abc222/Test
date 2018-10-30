@@ -1,7 +1,10 @@
 package com.example.xiaoxiong.test;
 
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.xiaoxiong.test.servicepractice.ServiceTestActivity;
 import com.mnt.MntLib;
 
 import org.json.JSONArray;
@@ -54,6 +58,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button cancel;
     private Dialog dialog;
 
+    //服务相关
+    private MyService.DownloadBinder downloadBinder;
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            downloadBinder = (MyService.DownloadBinder)service;
+            downloadBinder.startDownload();
+            downloadBinder.getProcess();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,20 +83,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.contentprovider_test).setOnClickListener(this);
         findViewById(R.id.bottom_dialog_show).setOnClickListener(this);
         Button dynamicTheme = (Button) findViewById(R.id.dynamic_theme);
         Button ratingbarTest = (Button) findViewById(R.id.ratingbar_test);
         Button fragmentTest = (Button) findViewById(R.id.fragment_test);
         Button broadcastTest = (Button) findViewById(R.id.broadcast_test);
         Button sendRequest = (Button) findViewById(R.id.send_request);
-        Button listviewTest = (Button) findViewById(R.id.listviewtest);
         responseText = (TextView) findViewById(R.id.reponse_text);
         dynamicTheme.setOnClickListener(this);
         ratingbarTest.setOnClickListener(this);
         fragmentTest.setOnClickListener(this);
         broadcastTest.setOnClickListener(this);
         sendRequest.setOnClickListener(this);
-        listviewTest.setOnClickListener(this);
+        findViewById(R.id.start_service).setOnClickListener(this);
+        findViewById(R.id.stop_service).setOnClickListener(this);
+        findViewById(R.id.bind_service).setOnClickListener(this);
+        findViewById(R.id.unbind_service).setOnClickListener(this);
+        findViewById(R.id.start_intent_service).setOnClickListener(this);
+        findViewById(R.id.service_test).setOnClickListener(this);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -111,6 +136,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.contentprovider_test:
+                Intent contentIntent = new Intent(this, ContentProviderTestActivity.class);
+                startActivity(contentIntent);
+                break;
             case R.id.bottom_dialog_show:
                 show();
                 break;
@@ -134,10 +163,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent2 = new Intent(this, BroadcastTestActivity.class);
                 startActivity(intent2);
                 break;
-            case R.id.listviewtest:
-                Intent intent3 = new Intent(this, ListViewTestActivity.class);
-                startActivity(intent3);
-                break;
             case R.id.choosePhoto:
                 Toast.makeText(this,"choosePhoto",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
@@ -148,6 +173,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_cancel:
                 dialog.dismiss();
+                break;
+            case R.id.start_service:
+                Intent startMySevice = new Intent(this, MyService.class);
+                startService(startMySevice);
+                break;
+            case R.id.stop_service:
+                Intent stopMyService = new Intent(this, MyService.class);
+                stopService(stopMyService);
+                break;
+            case R.id.bind_service:
+                Intent bindMySevice = new Intent(this, MyService.class);
+                bindService(bindMySevice, connection, BIND_AUTO_CREATE);
+                break;
+            case R.id.unbind_service:
+                unbindService(connection);
+                break;
+            case R.id.start_intent_service:
+                Log.d("MyIntentService","Thread id is: " + Thread.currentThread().getId());
+                Intent startIntentService = new Intent(this, MyIntentService.class);
+                startService(startIntentService);
+                break;
+            case R.id.service_test:
+                Intent intent3 = new Intent(this, ServiceTestActivity.class);
+                startActivity(intent3);
                 break;
             default:
                 break;

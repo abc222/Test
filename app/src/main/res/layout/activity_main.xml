@@ -6,6 +6,13 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/contentprovider_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ContentProvider Test"/>
+
     <Button
         android:id="@+id/bottom_dialog_show"
         android:layout_width="match_parent"
@@ -42,17 +49,60 @@
         android:layout_height="wrap_content"
         android:text="Send Request"/>
 
-    <Button
-        android:id="@+id/listviewtest"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ListView Test"/>
+        android:orientation="horizontal">
 
-    <com.example.xiaoxiong.test.MyView
+        <Button
+            android:id="@+id/start_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Start Service"/>
+
+        <Button
+            android:id="@+id/stop_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Stop Service"/>
+
+        <Button
+            android:id="@+id/bind_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bind Service"/>
+
+        <Button
+            android:id="@+id/unbind_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Unbind Service"/>
+
+        <Button
+            android:id="@+id/start_intent_service"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Start IntentService"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/service_test"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:default_size="100dp"
-        android:background="#ff2222"/>
+        android:layout_height="wrap_content"
+        android:text="Service Test"/>
+
+    <!--自定义View-->
+    <!--<com.example.xiaoxiong.test.MyView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100dp"-->
+        <!--app:default_size="100dp"-->
+        <!--android:background="#ff2222"/>-->
 
     <!--
   itemBackground  item的背景  ,设置之后将无法看到默认的水波纹效果
